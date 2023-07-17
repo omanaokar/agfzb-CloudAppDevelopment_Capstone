@@ -25,11 +25,9 @@
                   <a class="navbar-brand" href="about">Home</a>
             </div>
             <form class="d-flex" role="search" method="post">
-                <input class="form-control me-2" type="text" placeholder="Username" aria-label="username" name="username">
-                <input class="form-control me-2" type="password" placeholder="Password" aria-label="psw" name="psw">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <p>{{ user.username }}</p>
-                    <button type="button" class="btn btn-outline-primary" type="submit">Logout</button>
+                    <button type="button" class="btn btn-link">({{ user.username }})</button>
+                    <a href="{% url 'djangoapp:logout' %}">Logout</a>
                   </div>
               </form>
         </div>
@@ -41,13 +39,14 @@
                   <a class="navbar-brand" href="#">Car Dealership</a>
                   <a class="navbar-brand" href="about">Home</a>
             </div>
-            <form class="d-flex" role="search" method="post">
-                <input class="form-control me-2" type="submit" placeholder="Username" aria-label="username">
-                <input class="form-control me-2" type="submit" placeholder="Password" aria-label="psw">
+            <form action="{% url 'djangoapp:login' %}" class="d-flex" method="post">
+                {% csrf_token %}
+                <input class="form-control me-2" type="text" placeholder="Username" name="username">
+                <input class="form-control me-2" type="password" placeholder="Password" name="psw">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn btn-primary">Login</button>
-                    <button type="button" class="btn btn-outline-primary">Sign Up</button>
-                  </div>
+                    <a href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                </div>
               </form>
         </div>
     </nav>

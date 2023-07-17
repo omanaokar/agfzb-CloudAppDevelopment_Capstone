@@ -39,7 +39,7 @@ def login_request(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('djangoapp/index.html')
+            return redirect('djangoapp:index')
         else:
             return render(request, 'djangoapp/index.html', context)
             
@@ -50,7 +50,7 @@ def login_request(request):
 def logout_request(request):
     print("Log out the user `{}`".format(request.user.username))
     logout(request)
-    return redirect('djangoapp/index.html')
+    return redirect('djangoapp:index')
 
 # Create a `registration_request` view to handle sign up request
 def registration_request(request):
@@ -66,6 +66,8 @@ def registration_request(request):
         first_name = request.POST.get('firstname', False)
         last_name = request.POST.get('lastname', False)
         user_exist = False
+
+        print(username, password, first_name, last_name)
         try:
             # Check if user already exists
             User.objects.get(username=username)
@@ -79,9 +81,9 @@ def registration_request(request):
             user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, password=password)
             # Login the user and redirect to course list page
             login(request, user)
-            return redirect("djangoapp/")
+            return redirect("djangoapp:index")
         else:
-            return render(request, 'onlinecourse/registration.html', context)
+            return render(request, 'djangoapp/registration.html', context)
 
 
 
