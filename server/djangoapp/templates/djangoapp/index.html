@@ -17,36 +17,45 @@
     <!-- Remove this line the first time you edit this file -->
 
     <!--Add a nav bar here -->
+    {% if user.is_authenticated %}
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <div class="navbar-header">
                   <a class="navbar-brand" href="#">Car Dealership</a>
                   <a class="navbar-brand" href="about">Home</a>
             </div>
-            {% if user.is_authenticated %}
+            <form class="d-flex" role="search" method="post">
+                <input class="form-control me-2" type="text" placeholder="Username" aria-label="username" name="username">
+                <input class="form-control me-2" type="password" placeholder="Password" aria-label="psw" name="psw">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <p>{{ user.username }}</p>
+                    <button type="button" class="btn btn-outline-primary" type="submit">Logout</button>
+                  </div>
+              </form>
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Car Dealership</a>
+                  <a class="navbar-brand" href="about">Home</a>
+            </div>
             <form class="d-flex" role="search" method="post">
                 <input class="form-control me-2" type="submit" placeholder="Username" aria-label="username">
                 <input class="form-control me-2" type="submit" placeholder="Password" aria-label="psw">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary" type="submit">Login</button>
-                    <button type="button" class="btn btn-outline-primary" type="submit">Sign Up</button>
+                    <button class="btn btn-primary">Login</button>
+                    <button type="button" class="btn btn-outline-primary">Sign Up</button>
                   </div>
               </form>
-            {% else %}
-            <form class="d-flex" role="search" method="post">
-                <input class="form-control me-2" type="submit" placeholder="Username" aria-label="username" name="username">
-                <input class="form-control me-2" type="submit" placeholder="Password" aria-label="psw" name="psw">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <p>{{ user.username }}}</p>
-                    <button type="button" class="btn btn-outline-primary" type="submit">Logout</button>
-                  </div>
-              </form>
-            {% endif %}
         </div>
     </nav>
+    {% endif %}
     <div>
  
     </div>
+
     <footer>
         <p><a href="contact" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Contact Us</a></p>
     </footer>
